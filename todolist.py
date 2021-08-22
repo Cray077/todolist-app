@@ -2,12 +2,12 @@ class Todolist:
     def __init__(self, text_str):
         self.text_str = text_str
     
-    def Add_list(s):
+    def add(s):
         ls = open("list.txt", "a")
         ls.write(s + "\n")
         ls.close
         
-    def Read_list():
+    def read():
         ls = open("list.txt","r")
         l = ls.readlines()
         todolist_number = 0
@@ -16,15 +16,18 @@ class Todolist:
             print(str(todolist_number) + " " + i)
         ls.close()
         
-    def Remove_list(num):
+    def remove(num):
         ls = open("list.txt","r")
         l = ls.readlines()
         ls.close()
+        print(l[num - 1])
         l.remove(l[num - 1])
         wls = open("list.txt", "w")
         wls.writelines(l)
         wls.close()
-        Todolist.Read_list()
+        
+    def get_list(*i):
+        print(i)
 
 command = ""
 while command != "exit":
@@ -35,13 +38,64 @@ while command != "exit":
         while e != "exit":
             e = input("Add a todolist: ")
             if e != "exit":
-                Todolist.Add_list(e)
+                Todolist.add(e)
             else:e = "exit"
 
     if command == "read":
-        Todolist.Read_list()
+        Todolist.read()
         
     if command == "remove":
-        Todolist.Read_list()
+        Todolist.read()
         num = int(input("Enter the number of the list: "))
-        Todolist.Remove_list(num)
+        Todolist.remove(num)
+        Todolist.read()
+    
+    
+    if command == "remove-m":
+        Todolist.read()
+        i = True
+        ls = []
+        while i == True:
+            e = input("Number of items to remove: ")
+            if e == "done":
+                i = False
+            else: ls.append(e)
+                
+        q = 0        
+        ls_ = []
+        for e in ls:
+            num = int(e)
+            ls_.append(num)
+            
+        ls_1 = sorted(ls_)
+        for item in ls_1:
+            num = int(item)
+            num -= q
+            Todolist.remove(num)
+            q += 1
+            
+        
+        
+    if command == "iop":
+        Todolist.read()
+        i = True
+        ls = []
+        while i == True:
+            e = input("Number of items to remove: ")
+            if e == "done":
+                i = False
+            else: ls.append(e)
+                
+        q = 0        
+        ls_ = []
+        for e in ls:
+            num = int(e)
+            ls_.append(num)
+        
+        ls_1 = sorted(ls_)
+        #print(ls)
+        print(ls_1)
+        
+        
+        
+        
